@@ -52,10 +52,11 @@ driver.quit()
 # ラインに送信用のメッセージに整形する
 financial_message = "【S&P500】\n" + sp500_data_01 + sp500_data_02 + "\n\n【オルカン】\n" + all_country_data_01 + all_country_data_02 + "\n\n【野村半導体】\n" + nomura_ai_data_01 + nomura_ai_data_02
 
+if len(financial_message) > 1000:
+    financial_message = financial_message[:997] + "..."
+
+
 # ラインに送信する
 auth={"Authorization":"Bearer "+token}
 content={"message":financial_message}
 requests.post(url,headers=auth, data=content)
-
-#ドライバーを終了させる
-driver.quit()
